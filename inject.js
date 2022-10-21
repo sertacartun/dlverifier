@@ -1,9 +1,3 @@
-var sweetAlert = document.createElement('script')
-sweetAlert.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js')
-document.head.appendChild(sweetAlert)
-
-
-
 jsonData = {
     "objName": "anLib.base.tms.eventCache",
     "website": "tailor-acceptance",
@@ -43,46 +37,50 @@ jsonData = {
     }
 }
 
-if (window.location.href.includes(jsonData.website)) {
+if (window.location.href.includes(jsonData.website) && window[jsonData['objName']]!='undefined') {
 
-    window.onload = (event) => {
-        var splitObj = jsonData.objName.split('.')
-        splitObj.forEach((e, i) => {
-            i == 0 ? eObj = window[e] : eObj = eObj[e]
-        });
+    var splitObj = jsonData.objName.split('.')
+    splitObj.forEach((e, i) => {
+        i == 0 ? eObj = window[e] : eObj = eObj[e]
+    });
 
-        for (let i = 0; i < Object.keys(jsonData["tasks"]).length; i++) {
+    for (let i = 0; i < Object.keys(jsonData["tasks"]).length; i++) {
 
-            //SAVE LAST TESTED TASK NUMBER TO LOCALSTORAGE
-            if (localStorage.getItem("index") != null) {
-                if (localStorage.getItem("index") != i + 1) {
-                    eval(jsonData["tasks"]["task" + (i + 1)][0].exec)
-                    localStorage.setItem("index", i + 1)
+        //SAVE LAST TESTED TASK NUMBER TO LOCALSTORAGE
+        if (localStorage.getItem("index") != null) {
+            if (localStorage.getItem("index") != i + 1) {
+                eval(jsonData["tasks"]["task" + (i + 1)][0].exec)
+                localStorage.setItem("index", i + 1)
+            }
+        } else {
+            localStorage.setItem("index", 0)
+            window.location.reload()
+        }
+
+
+        //START TESTING THE TASKS
+        for (let index = 0; index < jsonData["tasks"]["task" + (i + 1)][0].fields.length; index++) {
+
+            taskStatus = {}
+            taskNumber = 'task' + (i + 1)
+            eventName = jsonData["tasks"]["task" + (i + 1)][0].event_name
+            fieldName = jsonData["tasks"]["task" + (i + 1)][0].fields[index].name
+            fieldValue = new RegExp(jsonData["tasks"]["task" + (i + 1)][0].fields[index].value, "i")
+
+            eObj = eObj.filter(e => e.event_name == eventName)
+
+            if (eObj.fieldName) {
+                if (window[jsonData["objName"]][fieldName].match(fieldValue) != null) {
+                    taskStatus[taskNumber][fieldName] = 'passed'
+                    localStorage.setItem('DlVerifier', taskStatus)
+                } else {
+                    taskStatus[taskNumber][fieldName] = 'failed'
+                    localStorage.setItem('DlVerifier', taskStatus)
                 }
             } else {
-                localStorage.setItem("index", 0)
-                window.location.reload()
-            }
-
-
-            //START TESTING THE TASKS
-            for (let index = 0; index < jsonData["tasks"]["task" + (i + 1)][0].fields.length; index++) {
-                eventName = jsonData["tasks"]["task" + (i + 1)][0].event_name
-                fieldName = jsonData["tasks"]["task" + (i + 1)][0].fields[index].name
-                fieldValue = new RegExp(jsonData["tasks"]["task" + (i + 1)][0].fields[index].value, "i")
-
-                eObj = eObj.filter(e => e.event_name == eventName)
-
-                if (eObj.fieldName) {
-                    if (window[jsonData["objName"]][fieldName].match(fieldValue) != null) {
-                        swal("Yes!", "Test Passed", "success");
-                    } else {
-                        swal("No!", "Test Failed", "error");
-                    }
-                } else {
-                    swal("No!", "The required field name was not found in the tracking object. ", "error");
-                }
+                taskStatus[taskNumber][fieldName] = 'failed'
+                localStorage.setItem('DlVerifier', taskStatus)
             }
         }
-    };
-}
+    }
+};
