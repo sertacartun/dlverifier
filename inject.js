@@ -118,3 +118,9 @@ if (window.location.href.includes(jsonData.website)) { // if the URL includes js
     runTest('task1')
 
 } // End of the 'if URL matches' statement 
+
+
+
+
+//TEST : ADD IF PAGE CHANGE ON EXEC
+//FIX : FLAT ALL ARRAYS IN TRACKING OBJECT TO CHECK WITH FIELD NAME
