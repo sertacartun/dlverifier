@@ -4,10 +4,36 @@ jsonData = {
     "tasks": {
         "task1": {
             "exec": `
-
+            if(window.location.href!='https://tailor-acceptance.mytheresa.com/de/en/men'){
+                window.location.href='https://tailor-acceptance.mytheresa.com/de/en/men'
+            }else{
+                isReady = ()=>{}
+            }
                 `,
 
             "event_name": "page_view",
+
+            "fields": [
+                {
+                    "name": "device.type",
+                    "value": "desktop|mobile|tablet"
+                },
+                {
+                    "name": "page.currencyCode",
+                    "value": "EUR|USD|GBP"
+                },
+                {
+                    "name": "page.type",
+                    "value": "home"
+                }
+            ]
+        },
+        "task2": {
+            "exec": `
+
+                `,
+
+            "event_name": "add_to_cart",
 
             "fields": [
                 {
@@ -46,15 +72,18 @@ function readData(dlv) {
     return dlv
 }
 
-function runTest(taskid) { // main function to run tests
+async function runTest(taskid) { // main function to run tests
     var taskid = taskid
     eval(jsonData.tasks[taskid].exec)
     var eventName = jsonData.tasks[taskid].event_name
 
     eventObject = readData(jsonData.objName).filter(e => e.event == eventName)
 
+    await isReady()
+    
+
     if (eventObject.length > 0) { // if there is matching event
-        taskStatus = {}
+        taskStatus = JSON.parse(localStorage.getItem('dl_verifier')) || {}
         taskStatus[taskid] = []
         jsonData.tasks[taskid].fields.forEach((e, i) => { //loop in expected fields
             var fieldName = e.name
@@ -87,20 +116,27 @@ function runTest(taskid) { // main function to run tests
         localStorage.setItem('dl_verifier', JSON.stringify(taskStatus))
     } else {
         // if there is no matching event
-        taskStatus = {}
+        taskStatus = JSON.parse(localStorage.getItem('dl_verifier')) || {}
         taskStatus[taskid] = 'no event'
         localStorage.setItem('dl_verifier', JSON.stringify(taskStatus))
         //setTimeout(runTest(taskid), 1500) // try 1500 ms later again
     }
 
-    taskid = 'task' + parseInt(taskid.split('task')[1]) + 1
-
     // pass to the next task if there is
+    var taskid = 'task' + (parseInt(taskid.split('task')[1]) + 1)
+    console.log(taskid)
     if (jsonData.tasks[taskid]) { runTest(taskid) }
 
 } // End of the runTest function
 
-
 if (window.location.href.includes(jsonData.website)) {
-    runTest('task1')
+    if (localStorage.getItem('dl_verifier')) {
+        var lastCompletedTask = Object.keys(JSON.parse(localStorage.getItem('dl_verifier'))).length
+        var nextTask = 'task' + (lastCompletedTask + 1)
+        if (jsonData.tasks[nextTask]) {
+            runTest(nextTask)
+        }
+    } else {
+        runTest('task1')
+    }
 }
