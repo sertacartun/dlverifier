@@ -216,19 +216,21 @@ function dlVerifier(status) {
     }
 }
 
-if (window.location.href.includes(jsonData.website) && localStorage.getItem('dl_verifier_status') == 'active') {
-    if (localStorage.getItem('dl_verifier')) {
-        var lastCompletedTask = Object.keys(JSON.parse(localStorage.getItem('dl_verifier'))).length
-        var nextTask = 'task' + (lastCompletedTask + 1)
+window.onload = function () {
+    if (window.location.href.includes(jsonData.website) && localStorage.getItem('dl_verifier_status') == 'active') {
+        if (localStorage.getItem('dl_verifier')) {
+            var lastCompletedTask = Object.keys(JSON.parse(localStorage.getItem('dl_verifier'))).length
+            var nextTask = 'task' + (lastCompletedTask + 1)
 
-        if (jsonData.tasks[nextTask]) {
-            runTest(nextTask)
+            if (jsonData.tasks[nextTask]) {
+                runTest(nextTask)
+            } else {
+                localStorage.setItem('dl_verifier_status', 'passive')
+            }
+
         } else {
-            localStorage.setItem('dl_verifier_status', 'passive')
+            runTest('task1')
         }
-
-    } else {
-        runTest('task1')
     }
 }
 
