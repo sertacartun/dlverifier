@@ -1,4 +1,4 @@
-jsonData = {
+var testData = {
     "objName": "window.anLib.base.tms.eventCache",
     "website": "tailor-acceptance",
     "tasks": {
@@ -12,17 +12,114 @@ jsonData = {
 
             "fields": [
                 {
-                    "name": "device.type",
-                    "value": "desktop|mobile|tablet"
+                    "name": "platform.environment",
+                    "value": "prod"
                 },
                 {
-                    "name": "page.currencyCode",
-                    "value": "EUR|USD|GBP"
+                    "name": "platform.version",
+                    "value": "[0-9].[0-9].[0-9]"
+                },
+                {
+                    "name": "platform.store",
+                    "value": "1"
+                },
+                {
+                    "name": "platform.storeView",
+                    "value": "01"
+                },
+                {
+                    "name": "platform.name",
+                    "value": "mytheresa"
+                },
+                {
+                    "name": "device.viewport",
+                    "value": "XS|S|M|L|XL"
+                },
+                {
+                    "name": "device.type",
+                    "value": "dekstop|mobile|desktop"
+                },
+                {
+                    "name": "page.country",
+                    "value": "DE"
                 },
                 {
                     "name": "page.type",
                     "value": "home"
+                },
+                {
+                    "name": "page.language",
+                    "value": "en"
+                },
+                {
+                    "name": "page.department",
+                    "value": "women"
+                },
+                {
+                    "name": "page.currencyCode",
+                    "value": "EUR"
+                },
+                {
+                    "name": "page.name",
+                    "value": ".*Test.*"
+                },
+                {
+                    "name": "page.sitemap",
+                    "value": "home"
+                },
+                {
+                    "name": "cart.products",
+                    "value": ".*object.*"
+                },
+                {
+                    "name": "cart.value",
+                    "value": "[0-9]{1,6}"
+                },
+                {
+                    "name": "cart.id",
+                    "value": ".*"
+                },
+                {
+                    "name": "wishlist.count",
+                    "value": "[0-9]{3}"
+                },
+                {
+                    "name": "wishlist.productids",
+                    "value": ".*object.*"
+                },
+                {
+                    "name": "user.loggedIn",
+                    "value": "yes|no"
+                },
+                {
+                    "name": "user.gender",
+                    "value": "none"
+                },
+                {
+                    "name": "user.csf",
+                    "value": ".*"
+                },
+                {
+                    "name": "user.cdf",
+                    "value": ".*"
+                },
+                {
+                    "name": "user.frontRow",
+                    "value": "yes|no|na"
+                },
+                {
+                    "name": "user.polymere",
+                    "value": "unknown"
+                },
+                {
+                    "name": "user.polymereCrit",
+                    "value": "unknown"
+                },
+                {
+                    "name": "user.polymereSha",
+                    "value": "unknown"
                 }
+
             ]
         },
         "task2": {
@@ -35,24 +132,40 @@ jsonData = {
 
             "fields": [
                 {
-                    "name": "atom",
-                    "value": ".*P00.*"
+                    "name": "list.designerName",
+                    "value": "multiple"
                 },
                 {
-                    "name": "atom_prd",
-                    "value": ".*value.*"
+                    "name": "list.categoryName",
+                    "value": "women::clothing"
                 },
                 {
-                    "name": "consent",
-                    "value": ".*value.*"
+                    "name": "list.categoryId",
+                    "value": ".*"
                 },
                 {
-                    "name": "myth_persistent_eh",
-                    "value": ".*value.*"
+                    "name": "list.totalNumProductsAll",
+                    "value": "[0-9]{3}"
                 },
                 {
-                    "name": "noproblem",
-                    "value": ".*value.*"
+                    "name": "list.totalNumProductsList",
+                    "value": "[0-9]{3}"
+                },
+                {
+                    "name": "list.totalNumOnSale",
+                    "value": "[0-9]{3}"
+                },
+                {
+                    "name": "list.totalNumOutOfStock",
+                    "value": "[0-9]{3}"
+                },
+                {
+                    "name": "list.searchKeyword",
+                    "value": ".*"
+                },
+                {
+                    "name": "products",
+                    "value": ".*object.*"
                 }
             ]
         },
@@ -66,24 +179,80 @@ jsonData = {
 
             "fields": [
                 {
-                    "name": "ecommerce.detail.products.0.id",
+                    "name": "product.id",
                     "value": ".*P00.*"
                 },
                 {
-                    "name": "atom_prd",
-                    "value": ".*value.*"
+                    "name": "product.name",
+                    "value": ".*loewe.*"
                 },
                 {
-                    "name": "consent",
-                    "value": ".*value.*"
+                    "name": "product.designerName",
+                    "value": ".*loewe.*"
                 },
                 {
-                    "name": "myth_persistent_eh",
-                    "value": ".*value.*"
+                    "name": "product.designerId",
+                    "value": "000798"
                 },
                 {
-                    "name": "noproblem",
-                    "value": ".*value.*"
+                    "name": "product.categoryName",
+                    "value": "Clothing::Tops::Sleeveless"
+                },
+                {
+                    "name": "product.categoryId",
+                    "value": "0006::0012::0943"
+                },
+                {
+                    "name": "product.price",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.priceVatOnly",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.priceReducedVatOnly",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.priceFinalDuties",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.priceEur",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.priceEurVatOnly",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.priceEurReducedVatOnly",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.priceEurFinalDuties",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.priceTaxPercent",
+                    "value": "21"
+                },
+                {
+                    "name": "product.isOnSale",
+                    "value": "true"
+                },
+                {
+                    "name": "product.saleDiscount",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.isOutOfStock",
+                    "value": "false"
+                },
+                {
+                    "name": "product.sizesOnStock",
+                    "value": "XS/null::y||S/null::y||M/null::y||L/null::n"
                 }
             ]
         },
@@ -99,24 +268,84 @@ jsonData = {
 
             "fields": [
                 {
-                    "name": "ecommerce.detail.products.0.id",
+                    "name": "product.id",
                     "value": ".*P00.*"
                 },
                 {
-                    "name": "atom_prd",
-                    "value": ".*value.*"
+                    "name": "product.name",
+                    "value": ".*loewe.*"
                 },
                 {
-                    "name": "consent",
-                    "value": ".*value.*"
+                    "name": "product.designerName",
+                    "value": ".*loewe.*"
                 },
                 {
-                    "name": "myth_persistent_eh",
-                    "value": ".*value.*"
+                    "name": "product.designerId",
+                    "value": "000798"
                 },
                 {
-                    "name": "noproblem",
-                    "value": ".*value.*"
+                    "name": "product.categoryName",
+                    "value": "Clothing::Tops::Sleeveless"
+                },
+                {
+                    "name": "product.categoryId",
+                    "value": "0006::0012::0943"
+                },
+                {
+                    "name": "product.price",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.priceVatOnly",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.priceReducedVatOnly",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.priceFinalDuties",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.priceEur",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.priceEurVatOnly",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.priceEurReducedVatOnly",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.priceEurFinalDuties",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.priceTaxPercent",
+                    "value": "21"
+                },
+                {
+                    "name": "product.isOnSale",
+                    "value": "true"
+                },
+                {
+                    "name": "product.saleDiscount",
+                    "value": ".*[0-9].*"
+                },
+                {
+                    "name": "product.isOutOfStock",
+                    "value": "false"
+                },
+                {
+                    "name": "product.sizeId",
+                    "value": "[0-9]"
+                },
+                {
+                    "name": "product.sizesOnStock",
+                    "value": "XS/null::y||S/null::y||M/null::y||L/null::n"
                 }
             ]
         }
@@ -148,22 +377,22 @@ function checkStatus(taskid) { // main function to run tests
     var taskid = taskid
     var continueTest = false
 
-    if (window.location.href != jsonData.tasks[taskid].url) { window.location.href = jsonData.tasks[taskid].url } else continueTest = true
-    
+    if (window.location.href != testData.tasks[taskid].url) { window.location.href = testData.tasks[taskid].url } else continueTest = true
+
     if (continueTest == true) {
-        eval(jsonData.tasks[taskid].exec)
-        setTimeout(() => { runTests (taskid)}, 3000);
+        eval(testData.tasks[taskid].exec)
+        setTimeout(() => { runTests(taskid) }, 5000);
     }
 }
 
-function runTests (taskid) {
-    var eventName = jsonData.tasks[taskid].event_name
-    eventObject = readData(jsonData.objName).filter(e => e.event == eventName)
+function runTests(taskid) {
+    var eventName = testData.tasks[taskid].event_name
+    eventObject = readData(testData.objName).filter(e => e.event == eventName)
 
     if (eventObject.length > 0) { // if there is matching event
         taskStatus = JSON.parse(localStorage.getItem('dl_verifier')) || {}
         taskStatus[taskid] = []
-        jsonData.tasks[taskid].fields.forEach((e, i) => { //loop in expected fields
+        testData.tasks[taskid].fields.forEach((e, i) => { //loop in expected fields
             var fieldName = e.name
             var fieldValue = new RegExp(e.value, "i")
 
@@ -198,22 +427,26 @@ function runTests (taskid) {
         taskStatus = JSON.parse(localStorage.getItem('dl_verifier')) || {}
         taskStatus[taskid] = 'no event'
         localStorage.setItem('dl_verifier', JSON.stringify(taskStatus))
-        //setTimeout(checkStatus(taskid), 1500) // try 1500 ms later again
     }
 
     // pass to the next task if there is
     taskid = 'task' + (parseInt(taskid.split('task')[1]) + 1)
 
-    if (jsonData.tasks[taskid]) { checkStatus(taskid) }
+    if (testData.tasks[taskid]) { checkStatus(taskid) } else {
+        Object.values(JSON.parse(localStorage.getItem('dl_verifier'))).forEach((e, i) => {
+            console.log('index : ' + 'task' + (i + 1))
+            console.table(e)
+        })
+    }
 
 } // End of the checkStatus function
 
 window.onload = function () {
-    if (window.location.href.includes(jsonData.website) && localStorage.getItem('dl_verifier_status') == 'active') {
+    if (window.location.href.includes(testData.website) && localStorage.getItem('dl_verifier_status') == 'active') {
         if (localStorage.getItem('dl_verifier')) {
             var lastCompletedTask = Object.keys(JSON.parse(localStorage.getItem('dl_verifier'))).length
             var nextTask = 'task' + (lastCompletedTask + 1)
-            if (jsonData.tasks[nextTask]) { checkStatus(nextTask) } else localStorage.setItem('dl_verifier_status', 'passive')
+            if (testData.tasks[nextTask]) { checkStatus(nextTask) } else localStorage.setItem('dl_verifier_status', 'passive')
         } else checkStatus('task1')
     }
 }
