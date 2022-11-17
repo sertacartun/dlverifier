@@ -1,6 +1,5 @@
 var testData = {
     "objName": "window.anLib.base.tms.eventCache",
-    "website": "tailor-acceptance",
     "tasks": {
         "task1": {
             "url": "https://tailor-acceptance.mytheresa.com/de/en/women",
@@ -13,7 +12,7 @@ var testData = {
             "fields": [
                 {
                     "name": "platform.environment",
-                    "value": "prod"
+                    "value": "dev"
                 },
                 {
                     "name": "platform.version",
@@ -353,16 +352,15 @@ var testData = {
 }
 
 
-function dlVerifier(status) {
-    if (status == 'active') {
-        localStorage.setItem('dl_verifier_status', 'active')
-        window.location.reload()
-    } else if (status == 'passive') {
-        localStorage.setItem('dl_verifier_status', 'passive')
+window.addEventListener('message', (e) => { // triggers dlVerifier() when user clicks to the 'Start' button
+    if (e.data.from == 'popup.js' && e.data.msg == 'active') {
+        localStorage.removeItem('dl_verifier')
+        localStorage.removeItem('dl_verifier_status')
+        dlVerifier('active')
     }
-}
+})
 
-function readData(dlv) {
+function readData(dlv) { // function to read data from dataLayer with dot notations
     var dlv = dlv.split('.')
     if (dlv.includes('window')) {
         dlv.splice(0, 1)
@@ -373,7 +371,16 @@ function readData(dlv) {
     return dlv
 }
 
-function checkStatus(taskid) { // main function to run tests
+function dlVerifier(status) { // starter function
+    if (status == 'active') {
+        localStorage.setItem('dl_verifier_status', 'active')
+        window.location.href = testData.tasks.task1.url
+    } else if (status == 'passive') {
+        localStorage.setItem('dl_verifier_status', 'passive')
+    }
+}
+
+function checkStatus(taskid) { // decides to continue to test or locate to the next tasks url
     var taskid = taskid
     var continueTest = false
 
@@ -385,7 +392,7 @@ function checkStatus(taskid) { // main function to run tests
     }
 }
 
-function runTests(taskid) {
+function runTests(taskid) { // core function to handle tests
     var eventName = testData.tasks[taskid].event_name
     eventObject = readData(testData.objName).filter(e => e.event == eventName)
 
@@ -433,16 +440,17 @@ function runTests(taskid) {
     taskid = 'task' + (parseInt(taskid.split('task')[1]) + 1)
 
     if (testData.tasks[taskid]) { checkStatus(taskid) } else {
+        localStorage.setItem('dl_verifier_status', 'passive')
         Object.values(JSON.parse(localStorage.getItem('dl_verifier'))).forEach((e, i) => {
             console.log('index : ' + 'task' + (i + 1))
             console.table(e)
         })
     }
 
-} // End of the checkStatus function
+}
 
-window.onload = function () {
-    if (window.location.href.includes(testData.website) && localStorage.getItem('dl_verifier_status') == 'active') {
+window.onload = function () { // Allows to continue testing on every page change
+    if (localStorage.getItem('dl_verifier_status') == 'active') {
         if (localStorage.getItem('dl_verifier')) {
             var lastCompletedTask = Object.keys(JSON.parse(localStorage.getItem('dl_verifier'))).length
             var nextTask = 'task' + (lastCompletedTask + 1)
@@ -450,3 +458,5 @@ window.onload = function () {
         } else checkStatus('task1')
     }
 }
+
+
