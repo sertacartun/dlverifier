@@ -2,24 +2,64 @@
 <html>
 
 <head>
-<style>
-  th{
-    text-align: left;
-    background: rgb(221, 221, 221);
-  }
+  <style>
+    body {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
 
-  td {
-    border: 1px solid black;
-  }
+    #confTable {
+      width: 50%;
+      text-align: right;
+    }
+
+    button {
+      background: #3498db;
+      border: 0;
+      padding: 10px;
+      border-radius: 5px;
+      color: white;
+    }
 
 
-</style>
+    table {
+      width: 100%;
+    }
+
+    .eventnameinp {
+      background-color: rgb(79, 79, 79);
+      padding: 5px;
+      width: -webkit-fill-available;
+      margin-top: 10px;
+      color: white;
+    }
+
+    th {
+      text-align: left;
+      background: rgb(221, 221, 221);
+    }
+
+    td {
+      border: 1px solid rgb(224, 224, 224);
+      padding: 5px;
+    }
+
+    input {
+      padding: 0;
+      width: 100%;
+      border: 0;
+      height: 20px;
+    }
+  </style>
 </head>
 
 <body>
-  <table id="confTable">
-
-  </table>
+  <div id="confTable">
+    <button>Save</button>
+    <button>Import</button>
+    <button>Export</button>
+  </div>
 
   <script src="options.js"></script>
 </body>

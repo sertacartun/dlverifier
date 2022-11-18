@@ -36,7 +36,7 @@ var testData = {
               },
               {
                   "name": "device.type",
-                  "value": "dekstop|mobile|desktop"
+                  "value": "desktop|mobile|desktop"
               },
               {
                   "name": "page.country",
@@ -351,24 +351,32 @@ var testData = {
   }
 }
 
-var mainTable = document.querySelector('#confTable')
+var mainDiv = document.querySelector('#confTable')
 
-Object.values(testData.tasks).forEach((e,i) => {
+Object.values(testData.tasks).forEach((e) => {
+
+  var newinp = document.createElement('input')
+  newinp.value = e.event_name
+  newinp.setAttribute('class','eventnameinp')
+  mainDiv.appendChild(newinp)
+
+  var newTbl = document.createElement('table')
+  mainDiv.appendChild(newTbl)
 
   var newth = document.createElement('th')
   newth.innerHTML='NAME'
-  mainTable.appendChild(newth)
+  newTbl.appendChild(newth)
 
   var newth2 = document.createElement('th')
   newth2.innerHTML='VALUE'
-  mainTable.appendChild(newth2)
+  newTbl.appendChild(newth2)
 
   e.fields.forEach((e)=>{
     var newtr = document.createElement('tr')
     newtr.innerHTML = `
-    <td>${e.name}</td>
-    <td>${e.value}</td>
+    <td><input type='text' value=${e.name}></td>
+    <td><input type='text' value=${e.value}></td>
     `
-    mainTable.appendChild(newtr)
+    newTbl.appendChild(newtr)
   })
 });
