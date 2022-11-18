@@ -449,7 +449,7 @@ function runTests(taskid) { // core function to handle tests
 
 }
 
-window.onload = function () { // Allows to continue testing on every page change
+window.onload = function () { // allows to continue testing on every page change
     if (localStorage.getItem('dl_verifier_status') == 'active') {
         if (localStorage.getItem('dl_verifier')) {
             var lastCompletedTask = Object.keys(JSON.parse(localStorage.getItem('dl_verifier'))).length
