@@ -8,3 +8,9 @@ function injectScript(file_path, tag) {
 
 injectScript(chrome.runtime.getURL('inject.js'), 'body');
 
+fetch(chrome.runtime.getURL("testData.json"))
+.then(response => response.json())
+.then(json => postMessage({
+    source:"content.js",
+    msg: json
+}));

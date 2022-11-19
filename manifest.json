@@ -6,7 +6,7 @@
     "manifest_version": 3,
     "web_accessible_resources": [
       {
-        "resources": ["inject.js"],
+        "resources": ["inject.js","testData.json"],
         "matches": ["<all_urls>"]
       }
     ],
