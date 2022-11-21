@@ -9,7 +9,7 @@ function injectScript(file_path, tag) {
 injectScript(chrome.runtime.getURL('inject.js'), 'body');
 
 chrome.storage.sync.get('testData', function(result) {
-    if(Object.keys(result).length!==0) {
+    if(Object.keys(result).length>1) {
         postMessage({
             source:"content.js",
             msg: result.testData
