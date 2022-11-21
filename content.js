@@ -8,19 +8,23 @@ function injectScript(file_path, tag) {
 
 injectScript(chrome.runtime.getURL('inject.js'), 'body');
 
-chrome.storage.sync.get('testData', function(result) {
-    if(Object.keys(result).length>1) {
-        postMessage({
-            source:"content.js",
-            msg: result.testData
+window.addEventListener('message', (e) => {
+    if (e.data.source == 'popup.js') {
+        chrome.storage.sync.get('testData', function (result) {
+            if (Object.keys(result).length > 1) {
+                postMessage({
+                    source: "content.js",
+                    msg: result.testData
+                })
+            }
+            else {
+                fetch(chrome.runtime.getURL("testData.json"))
+                    .then(response => response.json())
+                    .then(result => postMessage({
+                        source: "content.js",
+                        msg: result
+                    }));
+            }
         })
     }
-    else {
-        fetch(chrome.runtime.getURL("testData.json"))
-        .then(response => response.json())
-        .then(result => postMessage({
-            source:"content.js",
-            msg: result
-        }));
-    }
-});
+})

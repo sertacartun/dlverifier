@@ -1,6 +1,6 @@
 window.addEventListener('message', (e) => { // triggers dlVerifier() when user clicks to the 'Start' button  
-    if (e.data.source=="content.js") testData = e.data.msg
-    if (e.data.source == 'popup.js') {
+    if (e.data.source=="content.js") {
+        testData = e.data.msg
         localStorage.removeItem('dl_verifier')
         localStorage.removeItem('dl_verifier_status')
         dlVerifier('active')
