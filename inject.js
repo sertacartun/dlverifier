@@ -1,11 +1,14 @@
 window.addEventListener('message', (e) => { // triggers dlVerifier() when user clicks to the 'Start' button  
     if (e.data.source=="content.js") {
-        testData = e.data.msg
+        localStorage.setItem('dl_verifier_data',JSON.stringify(e.data.msg))
+        testData = JSON.parse(localStorage.getItem('dl_verifier_data'))
         localStorage.removeItem('dl_verifier')
         localStorage.removeItem('dl_verifier_status')
         dlVerifier('active')
     }
 })
+
+testData = JSON.parse(localStorage.getItem('dl_verifier_data'))
 
 function readData(dlv) { // function to read data from dataLayer with dot notations
     var dlv = dlv.split('.')
