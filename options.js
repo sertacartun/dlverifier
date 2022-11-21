@@ -1,5 +1,5 @@
 chrome.storage.sync.get('testData', function(result) {
-    if(Object.keys(result).length!==0) createTable(result.testData)
+    if(Object.keys(result).length>1) createTable(result.testData)
     else {
         fetch(chrome.runtime.getURL("testData.json"))
         .then(response => response.json())
