@@ -20,11 +20,25 @@
       padding: 10px;
       border-radius: 5px;
       color: white;
+      cursor: pointer;
+    }
+
+    #mainObj {
+      margin-top: 5px;
+      padding-left: 5px;
+      font-weight: bold;
+      background: beige;
+      border-radius: 5px;
+      border: 1px solid black;
     }
 
 
     table {
       width: 100%;
+    }
+
+    label {
+      display: flex;
     }
 
     .eventnameinp {
@@ -53,29 +67,39 @@
       height: 20px;
     }
 
-    .urlinp{
+    .urlinp {
       margin-top: 5px;
       background-color: #ebebeb;
     }
 
-    textarea.exec{
+    textarea.exec {
       width: -webkit-fill-available;
       margin-top: 5px;
       resize: none;
     }
 
-    .task{
+    .task {
       display: flex;
       align-items: center;
     }
 
-    .rmvtask,.collapse{
+    .newfield {
+      display: inline-block;
+      margin: 10px 0 5px 0;
+      background: #d2d2ff;
+      padding: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .rmvtask,
+    .collapse {
       font-size: initial;
       font-weight: bold;
       border: 1px solid black;
       padding: 4px;
       cursor: pointer;
-      margin : 10px 0 0 5px
+      margin: 10px 0 0 5px
     }
   </style>
 </head>
@@ -84,7 +108,7 @@
   <div id="confTable">
     <button>Import</button>
     <button>Export</button>
-    <button>Save</button>
+    <button class="save">Save</button>
   </div>
 
   <script src="options.js"></script>

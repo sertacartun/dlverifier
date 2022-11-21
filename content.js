@@ -14,3 +14,20 @@ fetch(chrome.runtime.getURL("testData.json"))
     source:"content.js",
     msg: json
 }));
+
+chrome.storage.sync.get('testData', function(result) {
+    if(Object.keys(result).length!==0) {
+        postMessage({
+            source:"content.js",
+            msg: result.testData
+        })
+    }
+    else {
+        fetch(chrome.runtime.getURL("testData.json"))
+        .then(response => response.json())
+        .then(result => postMessage({
+            source:"content.js",
+            msg: result
+        }));
+    }
+});
