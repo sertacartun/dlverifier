@@ -7,8 +7,8 @@ window.addEventListener('message', (e) => { // triggers dlVerifier() when user c
         dlVerifier('active')
     }
 })
-
 testData = JSON.parse(localStorage.getItem('dl_verifier_data'))
+
 
 function readData(dlv) { // function to read data from dataLayer with dot notations
     var dlv = dlv.split('.')

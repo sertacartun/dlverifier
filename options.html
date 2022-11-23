@@ -83,6 +83,18 @@
       align-items: center;
     }
 
+    .fieldFx{
+      border: 0;
+    }
+
+    .rmvfield{
+      background: #f2f2f2;
+    padding: 0 10px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    }
+
     .newfield {
       display: inline-block;
       margin: 10px 0 5px 0;
@@ -106,8 +118,10 @@
 
 <body>
   <div id="confTable">
-    <button>Import</button>
-    <button>Export</button>
+    <button class="collapseAll">Collapse All</button>
+    <!-- <button>Import</button>
+    <button>Export</button> -->
+    <button class="add">Add</button>
     <button class="save">Save</button>
   </div>
 
